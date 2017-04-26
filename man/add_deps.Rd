@@ -27,7 +27,7 @@ Add dependencies to a DESCRIPTION file
 \examples{
 # a superficial example with this package's DESCRIPTION file
 LIB <- .libPaths()[1]
-pkg <- file.path(LIB, "ratpack", "DESCRIPTION")
+pkg <- file.path(LIB, "diaper", "DESCRIPTION")
 # note the Dependency version for R
 write.dcf(read.dcf(pkg))
 # now we change it to be 3.0

@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Ratpack
+# diaper
 
 This is a package to create a `DESCRIPTION` file for your project that lists
 specific dependencies and versions of packages needed for analysis. Yes, 
@@ -21,7 +21,7 @@ packages like [packrat] exist, but I've found it to be a bit cumbersome. With a
 and install them with [devtools].
 
 [![Project Status: WIP - Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
-[![Travis-CI Build Status](https://travis-ci.org/zkamvar/ratpack.svg?branch=master)](https://travis-ci.org/zkamvar/ratpack)
+[![Travis-CI Build Status](https://travis-ci.org/zkamvar/diaper.svg?branch=master)](https://travis-ci.org/zkamvar/diaper)
 
 ## Making Your DESCRIPTION file
 
@@ -35,7 +35,7 @@ the file doesn't exist, it will simply be created.
 ```{r}
 tmp <- tempdir() # when using this for your own project, simply keep this as
                  # your current directory
-ratpack::add_deps(c("RClone (>= 1.0.2)", "dplyr (>= 0.5.0)"), 
+diaper::add_deps(c("RClone (>= 1.0.2)", "dplyr (>= 0.5.0)"), 
                   field = "Imports", 
                   file = file.path(tmp, "DESCRIPTION"), 
                   name = "RCanalysis",
@@ -54,7 +54,7 @@ We can also update fields such as the default version of R. Note that we don't
 need the `name` parameter here, because the file already exists.
 
 ```{r}
-ratpack::add_deps("R (>= 3.2.0)",
+diaper::add_deps("R (>= 3.2.0)",
                   field = "Depends",
                   file = file.path(tmp, "DESCRIPTION"),
                   write = TRUE)
@@ -69,9 +69,12 @@ This may be the only iteration of the package, but if there is interest, it coul
 be made more user-friendly with the following:
 
 - Customization of more DESCRIPTION fields (i.e. Authors@R)
+- Removal of entries
 - Bioconductor repositories
 - Remotes
-- System Requirements
+- SystemRequirements
+- RStudio add-in
+- Shiny app
 
 
 [packrat]: https://cran.r-project.org/package=packrat

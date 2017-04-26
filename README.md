@@ -1,11 +1,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-Ratpack
-=======
+diaper
+======
 
 This is a package to create a `DESCRIPTION` file for your project that lists specific dependencies and versions of packages needed for analysis. Yes, packages like [packrat](https://cran.r-project.org/package=packrat) exist, but I've found it to be a bit cumbersome. With a `DESCRIPTION` file, it's possible to list the packages you need for an analysis and install them with [devtools](https://cran.r-project.org/package=devtools).
 
-[![Project Status: WIP - Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip) [![Travis-CI Build Status](https://travis-ci.org/zkamvar/ratpack.svg?branch=master)](https://travis-ci.org/zkamvar/ratpack)
+[![Project Status: WIP - Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip) [![Travis-CI Build Status](https://travis-ci.org/zkamvar/diaper.svg?branch=master)](https://travis-ci.org/zkamvar/diaper)
 
 Making Your DESCRIPTION file
 ----------------------------
@@ -17,7 +17,7 @@ First, you use `add_deps()` to add dependiencies to your DESCRIPTION file. If th
 ``` r
 tmp <- tempdir() # when using this for your own project, simply keep this as
                  # your current directory
-ratpack::add_deps(c("RClone (>= 1.0.2)", "dplyr (>= 0.5.0)"), 
+diaper::add_deps(c("RClone (>= 1.0.2)", "dplyr (>= 0.5.0)"), 
                   field = "Imports", 
                   file = file.path(tmp, "DESCRIPTION"), 
                   name = "RCanalysis",
@@ -44,18 +44,18 @@ devtools::install(tmp)
 #> Installing dplyr
 #> '/Library/Frameworks/R.framework/Resources/bin/R' --no-site-file  \
 #>   --no-environ --no-save --no-restore --quiet CMD INSTALL  \
-#>   '/private/var/folders/qd/dpdhfsz12wb3c7wz0xdm6dbm0000gn/T/RtmpBoG8ti/devtools8df4aa95292/dplyr'  \
+#>   '/private/var/folders/qd/dpdhfsz12wb3c7wz0xdm6dbm0000gn/T/RtmpZi0XFo/devtools938652e5bf33/dplyr'  \
 #>   --library='/Users/zhian/R' --install-tests
 #> 
 #> Installing RClone
 #> '/Library/Frameworks/R.framework/Resources/bin/R' --no-site-file  \
 #>   --no-environ --no-save --no-restore --quiet CMD INSTALL  \
-#>   '/private/var/folders/qd/dpdhfsz12wb3c7wz0xdm6dbm0000gn/T/RtmpBoG8ti/devtools8df41b6d6029/RClone'  \
+#>   '/private/var/folders/qd/dpdhfsz12wb3c7wz0xdm6dbm0000gn/T/RtmpZi0XFo/devtools93862d4d9a0a/RClone'  \
 #>   --library='/Users/zhian/R' --install-tests
 #> 
 #> '/Library/Frameworks/R.framework/Resources/bin/R' --no-site-file  \
 #>   --no-environ --no-save --no-restore --quiet CMD INSTALL  \
-#>   '/private/var/folders/qd/dpdhfsz12wb3c7wz0xdm6dbm0000gn/T/RtmpBoG8ti'  \
+#>   '/private/var/folders/qd/dpdhfsz12wb3c7wz0xdm6dbm0000gn/T/RtmpZi0XFo'  \
 #>   --library='/Users/zhian/R' --install-tests
 #> 
 ```
@@ -63,7 +63,7 @@ devtools::install(tmp)
 We can also update fields such as the default version of R. Note that we don't need the `name` parameter here, because the file already exists.
 
 ``` r
-ratpack::add_deps("R (>= 3.2.0)",
+diaper::add_deps("R (>= 3.2.0)",
                   field = "Depends",
                   file = file.path(tmp, "DESCRIPTION"),
                   write = TRUE)
@@ -86,6 +86,9 @@ Roadmap
 This may be the only iteration of the package, but if there is interest, it could be made more user-friendly with the following:
 
 -   Customization of more DESCRIPTION fields (i.e. <Authors@R>)
+-   Removal of entries
 -   Bioconductor repositories
 -   Remotes
--   System Requirements
+-   SystemRequirements
+-   RStudio add-in
+-   Shiny app

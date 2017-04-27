@@ -29,17 +29,17 @@ Here's an example of creating a DESCRIPTION file using the [RClone] and [dplyr]
 packages.
 
 
-First, you use `add_deps()` to add dependiencies to your DESCRIPTION file. If
+First, you use `add()` to add dependiencies to your DESCRIPTION file. If
 the file doesn't exist, it will simply be created.
 
 ```{r}
 tmp <- tempdir() # when using this for your own project, simply keep this as
                  # your current directory
-diaper::add_deps(c("RClone (>= 1.0.2)", "dplyr (>= 0.5.0)"), 
-                  field = "Imports", 
-                  file = file.path(tmp, "DESCRIPTION"), 
-                  name = "RCanalysis",
-                  write = TRUE)
+diaper::add(c("RClone (>= 1.0.2)", "dplyr (>= 0.5.0)"), 
+            field = "Imports", 
+            file = file.path(tmp, "DESCRIPTION"), 
+            name = "RCanalysis",
+            write = TRUE)
 # View the file that we just created
 write.dcf(read.dcf(file.path(tmp, "DESCRIPTION")))
 ```
@@ -54,10 +54,10 @@ We can also update fields such as the default version of R. Note that we don't
 need the `name` parameter here, because the file already exists.
 
 ```{r}
-diaper::add_deps("R (>= 3.2.0)",
-                  field = "Depends",
-                  file = file.path(tmp, "DESCRIPTION"),
-                  write = TRUE)
+diaper::add("R (>= 3.2.0)",
+            field = "Depends",
+            file = file.path(tmp, "DESCRIPTION"),
+            write = TRUE)
 write.dcf(read.dcf(file.path(tmp, "DESCRIPTION")))
 ```
 
@@ -69,7 +69,6 @@ This may be the only iteration of the package, but if there is interest, it coul
 be made more user-friendly with the following:
 
 - Customization of more DESCRIPTION fields (i.e. Authors@R)
-- Removal of entries
 - Bioconductor repositories
 - Remotes
 - SystemRequirements

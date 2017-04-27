@@ -12,16 +12,16 @@ Making Your DESCRIPTION file
 
 Here's an example of creating a DESCRIPTION file using the [RClone](https://cran.r-project.org/package=RClone) and [dplyr](https://cran.r-project.org/package=dplyr) packages.
 
-First, you use `add_deps()` to add dependiencies to your DESCRIPTION file. If the file doesn't exist, it will simply be created.
+First, you use `add()` to add dependiencies to your DESCRIPTION file. If the file doesn't exist, it will simply be created.
 
 ``` r
 tmp <- tempdir() # when using this for your own project, simply keep this as
                  # your current directory
-diaper::add_deps(c("RClone (>= 1.0.2)", "dplyr (>= 0.5.0)"), 
-                  field = "Imports", 
-                  file = file.path(tmp, "DESCRIPTION"), 
-                  name = "RCanalysis",
-                  write = TRUE)
+diaper::add(c("RClone (>= 1.0.2)", "dplyr (>= 0.5.0)"), 
+            field = "Imports", 
+            file = file.path(tmp, "DESCRIPTION"), 
+            name = "RCanalysis",
+            write = TRUE)
 # View the file that we just created
 write.dcf(read.dcf(file.path(tmp, "DESCRIPTION")))
 #> Package: RCanalysis
@@ -44,18 +44,18 @@ devtools::install(tmp)
 #> Installing dplyr
 #> '/Library/Frameworks/R.framework/Resources/bin/R' --no-site-file  \
 #>   --no-environ --no-save --no-restore --quiet CMD INSTALL  \
-#>   '/private/var/folders/qd/dpdhfsz12wb3c7wz0xdm6dbm0000gn/T/RtmpZi0XFo/devtools938652e5bf33/dplyr'  \
+#>   '/private/var/folders/qd/dpdhfsz12wb3c7wz0xdm6dbm0000gn/T/Rtmpz36E4t/devtools9b866e583fdf/dplyr'  \
 #>   --library='/Users/zhian/R' --install-tests
 #> 
 #> Installing RClone
 #> '/Library/Frameworks/R.framework/Resources/bin/R' --no-site-file  \
 #>   --no-environ --no-save --no-restore --quiet CMD INSTALL  \
-#>   '/private/var/folders/qd/dpdhfsz12wb3c7wz0xdm6dbm0000gn/T/RtmpZi0XFo/devtools93862d4d9a0a/RClone'  \
+#>   '/private/var/folders/qd/dpdhfsz12wb3c7wz0xdm6dbm0000gn/T/Rtmpz36E4t/devtools9b866f817f1b/RClone'  \
 #>   --library='/Users/zhian/R' --install-tests
 #> 
 #> '/Library/Frameworks/R.framework/Resources/bin/R' --no-site-file  \
 #>   --no-environ --no-save --no-restore --quiet CMD INSTALL  \
-#>   '/private/var/folders/qd/dpdhfsz12wb3c7wz0xdm6dbm0000gn/T/RtmpZi0XFo'  \
+#>   '/private/var/folders/qd/dpdhfsz12wb3c7wz0xdm6dbm0000gn/T/Rtmpz36E4t'  \
 #>   --library='/Users/zhian/R' --install-tests
 #> 
 ```
@@ -63,10 +63,10 @@ devtools::install(tmp)
 We can also update fields such as the default version of R. Note that we don't need the `name` parameter here, because the file already exists.
 
 ``` r
-diaper::add_deps("R (>= 3.2.0)",
-                  field = "Depends",
-                  file = file.path(tmp, "DESCRIPTION"),
-                  write = TRUE)
+diaper::add("R (>= 3.2.0)",
+            field = "Depends",
+            file = file.path(tmp, "DESCRIPTION"),
+            write = TRUE)
 write.dcf(read.dcf(file.path(tmp, "DESCRIPTION")))
 #> Package: RCanalysis
 #> Title:
@@ -86,7 +86,6 @@ Roadmap
 This may be the only iteration of the package, but if there is interest, it could be made more user-friendly with the following:
 
 -   Customization of more DESCRIPTION fields (i.e. <Authors@R>)
--   Removal of entries
 -   Bioconductor repositories
 -   Remotes
 -   SystemRequirements

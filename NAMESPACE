@@ -2,4 +2,5 @@
 
 export(add)
 export(make_base_dcf)
+export(remove)
 importFrom(utils,modifyList)

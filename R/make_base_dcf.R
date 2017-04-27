@@ -43,6 +43,41 @@ add <- function(replacements = c("utils", "stats", "grDevices"), field = "Import
 }
 
 
+
+
+#' Remove dependencies from a DESCRIPTION file
+#'
+#' This function will remove any entries that don't belong in the description
+#' file, regardless of version number. This can be used to remove misspelled or
+#' unused dependencies.
+#'
+#' @param to_remove a list of dependencies to remove
+#' @inheritParams add
+#'
+#' @return if `write = TRUE`, the specified file will be modified. If `write =
+#'   FALSE`, the proposed changes.
+#' @export
+#'
+#' @examples
+#'
+#' tmp <- tempdir()
+#' add(file = file.path(tmp, "DESCRIPTION"), write = TRUE)
+#' write.dcf(read.dcf(file.path(tmp, "DESCRIPTION")))
+#' remove("utils", file = file.path(tmp, "DESCRIPTION"))
+#'
+remove <- function(to_remove = c("utlis"), field = "Imports", file = "DESCRIPTION", write = FALSE){
+  if (!file.exists(file)){
+    msg <- paste("the file", normalizePath(file), "doesn't exist.",
+                 "I can't remove something that isn't there.")
+    stop(msg)
+  }
+  x <- read.dcf(file, all = TRUE)
+  entries  <- split_field(x, field)
+  stripped <- strip_parens(entries)
+  entries <- entries[!stripped %in% to_remove]
+  x[[field]] <- paste0(entries, collapse = ", ")
+  write.dcf(x, file = if (write) file else "")
+}
 #' Create a base DESCRIPTION file for your project
 #'
 #' @param name the name of your analysis

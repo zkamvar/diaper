@@ -1,3 +1,7 @@
+# diaper 0.3.0
+
+* new function `replace` will replace entries
+
 # diaper 0.2.0
 
 * `add_deps` is now just `add`

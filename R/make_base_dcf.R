@@ -1,6 +1,16 @@
 split_field <- function(x, field) gsub("\n", "", trimws(strsplit(x[[field]], ",")[[1]]))
 strip_parens <- function(x) vapply(strsplit(x, " *\\("), "[", character(1), 1)
 
+stop_if_not_exist <- function(file){
+  if (!file.exists(file)){
+    msg <- paste("the file", normalizePath(file), "doesn't exist.",
+                 "I can't remove something that isn't there.")
+    stop(msg, call. = FALSE)
+  } else {
+    invisible(NULL)
+  }
+}
+
 #' Add dependencies to a DESCRIPTION file
 #'
 #' @param replacements A character string of packages to add/replace
@@ -66,15 +76,41 @@ add <- function(replacements = c("utils", "stats", "grDevices"), field = "Import
 #' remove("utils", file = file.path(tmp, "DESCRIPTION"))
 #'
 remove <- function(to_remove = c("utlis"), field = "Imports", file = "DESCRIPTION", write = FALSE){
-  if (!file.exists(file)){
-    msg <- paste("the file", normalizePath(file), "doesn't exist.",
-                 "I can't remove something that isn't there.")
-    stop(msg)
-  }
+  stop_if_not_exist(file)
   x <- read.dcf(file, all = TRUE)
   entries  <- split_field(x, field)
   stripped <- strip_parens(entries)
   entries <- entries[!stripped %in% to_remove]
+  x[[field]] <- paste0(entries, collapse = ", ")
+  write.dcf(x, file = if (write) file else "")
+}
+
+#' Replace a dependency in a DESCRIPTION file
+#'
+#' This will replace a dependency in a DESCRIPTION file, ignoring the parens
+#'
+#' @param from a dependency to remove (sans parenthetical version)
+#' @param to the depenency to replace (parenthetical version optional)
+#' @inheritParams add
+#'
+#' @return if `write = TRUE`, the specified file will be modified. If `write =
+#'   FALSE`, the proposed changes.
+#' @export
+#'
+#' @examples
+#'
+#' tmp <- tempdir()
+#' add(c("utils", "stats", "grDEvices (>= 3.0.0)"), file = file.path(tmp, "DESCRIPTION"), write = TRUE)
+#' write.dcf(read.dcf(file.path(tmp, "DESCRIPTION")))
+#' # Whoops! we misspelled grDevices. We can replace it.
+#' replace("grDEvices", "grDevices (>= 3.4.0)", file = file.path(tmp, "DESCRIPTION"))
+#'
+replace <- function(from = "utlis", to = "utils", field = "Imports", file = "DESCRIPTION", write = FALSE){
+  stop_if_not_exist(file)
+  x <- read.dcf(file, all = TRUE)
+  entries  <- split_field(x, field)
+  stripped <- strip_parens(entries)
+  entries  <- c(entries[!stripped %in% from], to)
   x[[field]] <- paste0(entries, collapse = ", ")
   write.dcf(x, file = if (write) file else "")
 }

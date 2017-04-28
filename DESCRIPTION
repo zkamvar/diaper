@@ -1,7 +1,7 @@
 Package: diaper
 Type: Package
 Title: A Lightweight Way To Catalogue Project Dependencies
-Version: 0.2.0
+Version: 0.3.0
 Authors@R: c(person(c("Zhian N."), "Kamvar", role = c("cre", "aut"), email = "zkamvar@gmail.com"))
 Maintainer: Zhian N. Kamvar <zkamvar@gmail.com>
 Description: This package is a lightweight method of creating a DESCRIPTION file for listing project

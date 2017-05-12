@@ -20,6 +20,11 @@ packages like [packrat] exist, but I've found it to be a bit cumbersome. With a
 `DESCRIPTION` file, it's possible to list the packages you need for an analysis
 and install them with [devtools].
 
+**Update:** Of course, the feature-rich package [desc] already exists for this
+purpose AND it can be installed without needing the user to install [devtools].
+
+----------
+
 [![Project Status: WIP - Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
 [![Travis-CI Build Status](https://travis-ci.org/zkamvar/diaper.svg?branch=master)](https://travis-ci.org/zkamvar/diaper)
 
@@ -80,3 +85,4 @@ be made more user-friendly with the following:
 [devtools]: https://cran.r-project.org/package=devtools
 [dplyr]: https://cran.r-project.org/package=dplyr
 [RClone]: https://cran.r-project.org/package=RClone
+[desc]: https://cran.r-project.org/package=desc

@@ -22,11 +22,22 @@ and install them with [devtools].
 
 **Update:** Of course, the feature-rich package [desc] already exists for this
 purpose AND it can be installed without needing the user to install [devtools].
-
-----------
+That being said, it assumes you have an R package and panicks if you don't.
 
 [![Project Status: WIP - Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
 [![Travis-CI Build Status](https://travis-ci.org/zkamvar/diaper.svg?branch=master)](https://travis-ci.org/zkamvar/diaper)
+
+
+## Installation
+
+To install *diaper*, you should use the [devtools] package:
+
+```{r, eval = FALSE}
+if (!requireNamespace("devtools")) install.packages("devtools", repos = "https://cran.rstudio.com")
+devtools::install_github("zkamvar/diaper")
+```
+
+----------
 
 ## Making Your DESCRIPTION file
 
@@ -40,6 +51,16 @@ the file doesn't exist, it will simply be created.
 ```{r}
 tmp <- tempdir() # when using this for your own project, simply keep this as
                  # your current directory
+diaper::add(c("RClone (>= 1.0.2)", "dplyr (>= 0.5.0)"), 
+            field = "Imports", 
+            file = file.path(tmp, "DESCRIPTION"), 
+            name = "RCanalysis")
+```
+
+By default, it will show us what WILL be created. To create/overwrite our new
+DESCRIPTION file, use `write = TRUE`.
+
+```{r}
 diaper::add(c("RClone (>= 1.0.2)", "dplyr (>= 0.5.0)"), 
             field = "Imports", 
             file = file.path(tmp, "DESCRIPTION"), 
